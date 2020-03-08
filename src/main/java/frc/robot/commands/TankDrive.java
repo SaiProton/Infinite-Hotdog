@@ -4,13 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.OperatorInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TankDrive extends CommandBase {
   private DriveTrain drive;
   private OperatorInput input;
 
   private double[] speedAdj = {0, 0};
-  
+    
   public TankDrive(DriveTrain driveSystem, OperatorInput userInput) {
     drive = driveSystem;
     input = userInput;
@@ -28,6 +29,9 @@ public class TankDrive extends CommandBase {
     double ly = input.driver.getRawAxis(Constants.L_STICK_Y);
     double rx = input.driver.getRawAxis(Constants.R_STICK_X);
 
+    SmartDashboard.putNumber("LY", ly);
+    SmartDashboard.putNumber("RX", rx);
+
     //for trigger speed changes:
     //Constants.MAX_SPEED = Constants.DEFAULT_SPD + (input.driver.getRawAxis(Constants.R_TRIGGER) - input.driver.getRawAxis(Constants.L_TRIGGER)) / 4;
 
@@ -38,14 +42,6 @@ public class TankDrive extends CommandBase {
     double rSpeed = Constants.MAX_SPEED * (ly + rx);
 
     drive.setMotors(lSpeed + speedAdj[0], rSpeed + speedAdj[1]);
-  }
-
-  private void alignBase() {
-    //math is trash, fix later
-    double yaw = drive.navX.getYaw();
-
-    speedAdj[0] = (yaw + 180) / 180;
-    speedAdj[1] = -speedAdj[0];
   }
 
   @Override

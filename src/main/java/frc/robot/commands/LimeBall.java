@@ -3,64 +3,60 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Conveyor;
-import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.OperatorInput;
 import frc.robot.subsystems.Turret;
 
 public class LimeBall extends CommandBase {
   private OperatorInput input;
   private Turret turret;
-  private Limelight lime;
+  // private Limelight lime;
   private Conveyor conveyor;
 
   private boolean tracking = false;
-  private int ballAmount = 0;
+  public static boolean shooting = false;
 
-  public LimeBall(OperatorInput operatorInput, Turret theTurret, Conveyor conveyorBelt, Limelight limeLight) {
+  public LimeBall(OperatorInput operatorInput, Turret theTurret, Conveyor conveyorBelt/*, Limelight*/) {
     input = operatorInput;
     turret = theTurret;
-    lime = limeLight;
+    // lime = limeLight;
     conveyor = conveyorBelt;
 
-    addRequirements(input);
-    addRequirements(turret);
-    addRequirements(conveyor);
-    addRequirements(lime);    
+    // addRequirements(input);
+    // addRequirements(turret);
+    // addRequirements(conveyor);
+    // addRequirements(lime);    
   }
 
   @Override
   public void initialize() {
-    lime.setLEDs(false);
+    // lime.setLEDs(false);
   }
 
   @Override
   public void execute() {
     tracking = input.tool.getBumperPressed(Hand.kLeft) ? !tracking : tracking;
-    ballAmount = input.tool.getBumperPressed(Hand.kRight) ? 1 : (input.tool.getTriggerAxis(Hand.kRight) > 0.5 ? 5 : ballAmount);
-
-    if(ballAmount > 0) {
+    shooting = input.tool.getTriggerAxis(Hand.kRight) > 0.5 ? true : false;
+    
+    if(shooting) {
       tracking = false;
 
-      turret.setShooters(0.6);
-      turret.setFeeder(0.8);
-
-      if(input.tool.getBumperPressed(Hand.kRight)) {
-        conveyor.cease();
+      if(!turret.getBall()) {
+        conveyor.setConveyor(ConveyorComplex.conveyorSpeed * 1.5);
+      } else {
+        turret.setFeeder(0.85);
       }
     } else {
       turret.cease();
     }
 
-    lime.setLEDs(tracking);
+    // lime.setLEDs(tracking);
 
     if(tracking) {
-      double xangle = lime.getValues().get("xangle");
+      // double xangle = lime.getValues().get("xangle");
       
       //tweak denominator if too sensitive/insensitive
-      turret.setRotation(xangle / 15);
+      // turret.setRotation(xangle / 15);
     }
-
-    ballAmount = 0;
   }
 
   @Override

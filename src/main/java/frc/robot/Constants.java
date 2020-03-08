@@ -24,29 +24,27 @@ public final class Constants {
     public static double MAX_SPEED = 0.5;
 
     //Robot Input Variables
-    public static final int[] TURRET_LIMITS = {0, 0};
+    public static final int[] CONVEYOR_OPTICALS = {0, 1};
+    public static final int BALL_LAUNCH_OPTICAL = 2;
 
-    public static final int[] INTAKE_LIMITS = {0, 0};
-
-    public static final int[] CONVEYOR_OPTICALS = {0, 0};
-    public static final int BALL_LAUNCH_OPTICAL = 0;
- 
-    public static final int DISTANCE_PWM = 0;
-    
+    public static final int[] INTAKE_LIMITS = {6, 4};
+    public static final int[] CLIMB_LIMITS = {5, 3};
+     
     //Robot Output Variables
-    public static final int[] LEFT_MOTOR_CANS = {0, 0};
-    public static final int[] RIGHT_MOTOR_CANS = {0, 0};
+    public static final int[] LEFT_DRIVE_CANS = {6, 7};
+    public static final int[] RIGHT_DRIVE_CANS = {9, 10};
 
-    public static final int[] SHOOTER_PWMs = {0, 0};
-    public static final int FEEDER_PWM = 0;
+    // public static final int[] SHOOTER_PWMs = {3, 4};
+    public static final int FEEDER_PWM = 5;
 
     public static final int ROTATOR_PWM = 0;
+  
+    public static final int CONVEYOR_CAN = 5;
+    public static final int INDEXER_CAN = 8;
 
-    public static final int[] CONVEYOR_PWMs = {0, 0, 0};
-    public static final int QUEUE_PWM = 0;
+    public static final int INTAKE_MOVER = 4;
+    public static final int INTAKER_PWM = 9;
 
-    public static final int INTAKE_MOVER = 0;
-    public static final int INTAKE_INTAKER = 0;
-
-    public static final int CLIMBER_PWM = 0;
+    public static final int CLIMB_ARM_PWM = 8;
+    public static final int CLIMB_ROPE_PWM = 6;
 }

@@ -6,20 +6,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
-  private Spark[] shooters = new Spark[2];
+  // private Spark[] shooters = new Spark[2];
   private Spark feeder = new Spark(Constants.FEEDER_PWM);
   private Spark rotator = new Spark(Constants.ROTATOR_PWM);
-  private DigitalInput ballReadyDetector = new DigitalInput(2);
+  private DigitalInput ballReadyDetector = new DigitalInput(Constants.BALL_LAUNCH_OPTICAL);
   
   public Turret() {
     for(int i = 0; i < 2; i++) {
-      shooters[i] = new Spark(Constants.SHOOTER_PWMs[i]);
+      // shooters[i] = new Spark(Constants.SHOOTER_PWMs[i]);
     }
   }
 
   public void setShooters(double speed) {
     for(int i = 0; i < 2; i++) {
-      shooters[i].setSpeed(speed);
+      // shooters[i].setSpeed(speed);
     }
   }
 
@@ -39,7 +39,7 @@ public class Turret extends SubsystemBase {
   public void cease() {
     rotator.set(0);
     feeder.set(0);
-    setShooters(0);
+    // setShooters(0);
   }
 
   @Override

@@ -9,14 +9,11 @@ public class IntakeSystem extends CommandBase {
   private Intake intake;
   private OperatorInput input;
 
-  private boolean upDown = false;
+  private boolean inputUp = false;
   
   public IntakeSystem(Intake intaker, OperatorInput operatorInput) {
     intake = intaker;
     input = operatorInput;
-    
-    addRequirements(intake);
-    addRequirements(input);
   }
 
   @Override
@@ -25,12 +22,12 @@ public class IntakeSystem extends CommandBase {
 
   @Override
   public void execute() {
-    upDown = input.driver.getAButtonPressed() ? !upDown : upDown;
-    int activate = input.driver.getTriggerAxis(Hand.kLeft) > 0.5 ? 0 : 1;
-
-    intake.setVertical(upDown);
+    // double upDown = input.tool.getBumperPressed(Hand.kLeft) ? 0.2 : (input.tool.getBumperPressed(Hand.kRight) ? -0.2 : 0);
+    double activate = input.tool.getTriggerAxis(Hand.kLeft) > 0.5 ? -0.75 : 0;
+    inputUp = input.tool.getBButtonPressed() ? !inputUp : inputUp;
+    
+    intake.setVertical(inputUp);
     intake.setActivation(activate);
-
   }
 
   @Override

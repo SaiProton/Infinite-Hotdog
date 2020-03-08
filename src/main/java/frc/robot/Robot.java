@@ -47,7 +47,7 @@ public class Robot extends TimedRobot {
     Command[] defaultCommands = roboContainer.getAllDefaultCommands();
 
     for(Command c : defaultCommands) {
-      c.schedule();
+      c.schedule(false);
     }
   }
 
