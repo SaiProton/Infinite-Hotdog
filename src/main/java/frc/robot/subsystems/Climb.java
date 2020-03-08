@@ -19,8 +19,8 @@ public class Climb extends SubsystemBase {
     boolean downLimit = climbLimits[0].get();
     boolean upLimit = climbLimits[1].get();
 
-    speed = (downLimit && speed < 0) ? 0 : speed;
-    speed = (upLimit && speed > 0) ? 0 : speed;
+    speed = (upLimit && speed < 0) ? 0 : speed;
+    speed = (downLimit && speed > 0) ? 0 : speed;
     
     climbArm.set(speed);
   }
