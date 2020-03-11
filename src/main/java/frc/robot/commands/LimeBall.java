@@ -39,7 +39,7 @@ public class LimeBall extends CommandBase {
     
     if(shooting) {
       tracking = false;
-
+      // turret.setShooters(0.5);
       if(!turret.getBall()) {
         conveyor.setConveyor(ConveyorComplex.conveyorSpeed * 1.5);
       } else {
@@ -47,6 +47,12 @@ public class LimeBall extends CommandBase {
       }
     } else {
       turret.cease();
+    }
+
+    if(input.tool.getXButton()) {
+      turret.setRotation(-1);
+    } else if(input.tool.getYButton()) {
+      turret.setRotation(1);
     }
 
     // lime.setLEDs(tracking);

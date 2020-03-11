@@ -18,10 +18,10 @@ public class ClimbCommand extends CommandBase {
   public void initialize() {
     
   }
-
-  @Override
+ 
+  @Override 
   public void execute() {
-    double climbSpeed = input.tool.getBumper(Hand.kLeft) ? -1 : (input.tool.getBumper(Hand.kRight) ? 0.5 : 0);
+    double climbSpeed = input.tool.getBumper(Hand.kLeft) ? -0.5 : (input.tool.getBumper(Hand.kRight) ? 0.5 : 0);
 
     climb.setArm(climbSpeed);
   }

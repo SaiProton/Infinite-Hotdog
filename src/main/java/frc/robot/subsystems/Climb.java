@@ -22,6 +22,9 @@ public class Climb extends SubsystemBase {
     speed = (upLimit && speed < 0) ? 0 : speed;
     speed = (downLimit && speed > 0) ? 0 : speed;
     
+    if(downLimit || upLimit) {
+      System.out.println("LIFTSTOP");
+    }
     climbArm.set(speed);
   }
 

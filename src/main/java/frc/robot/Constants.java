@@ -34,10 +34,10 @@ public final class Constants {
     public static final int[] LEFT_DRIVE_CANS = {6, 7};
     public static final int[] RIGHT_DRIVE_CANS = {9, 10};
 
-    // public static final int[] SHOOTER_PWMs = {3, 4};
+    public static final int[] SHOOTER_CANS = {4, 5};
     public static final int FEEDER_PWM = 5;
 
-    public static final int ROTATOR_PWM = 0;
+    public static final int ROTATOR_PWM = 6;
   
     public static final int CONVEYOR_CAN = 5;
     public static final int INDEXER_CAN = 8;
@@ -46,5 +46,5 @@ public final class Constants {
     public static final int INTAKER_PWM = 9;
 
     public static final int CLIMB_ARM_PWM = 8;
-    public static final int CLIMB_ROPE_PWM = 6;
+    public static final int CLIMB_ROPE_PWM = 7;
 }

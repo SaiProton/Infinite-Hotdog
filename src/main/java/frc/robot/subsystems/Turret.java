@@ -1,26 +1,28 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
-  // private Spark[] shooters = new Spark[2];
+  // private CANSparkMax[] shooters = new CANSparkMax[2];
   private Spark feeder = new Spark(Constants.FEEDER_PWM);
   private Spark rotator = new Spark(Constants.ROTATOR_PWM);
   private DigitalInput ballReadyDetector = new DigitalInput(Constants.BALL_LAUNCH_OPTICAL);
   
   public Turret() {
     for(int i = 0; i < 2; i++) {
-      // shooters[i] = new Spark(Constants.SHOOTER_PWMs[i]);
+      // shooters[i] = new CANSparkMax(Constants.SHOOTER_CANS[i], MotorType.kBrushless);
     }
   }
 
   public void setShooters(double speed) {
-    for(int i = 0; i < 2; i++) {
-      // shooters[i].setSpeed(speed);
-    }
+    // shooters[0].set(speed);
+    // shooters[1].set(-speed);
   }
 
   public void setFeeder(double speed) {
