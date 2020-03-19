@@ -20,8 +20,8 @@ public final class Constants {
     public static final int Y_BUTTON = 4;
 
     //Configuration Variables
-    public static final double DEFAULT_SPD = 0.5;
-    public static double MAX_SPEED = 0.5;
+    public static final double DEFAULT_SPD = 0.4;
+    public static double MAX_SPEED = 0.4;
 
     //Robot Input Variables
     public static final int[] CONVEYOR_OPTICALS = {0, 1};
@@ -34,12 +34,12 @@ public final class Constants {
     public static final int[] LEFT_DRIVE_CANS = {6, 7};
     public static final int[] RIGHT_DRIVE_CANS = {9, 10};
 
-    public static final int[] SHOOTER_CANS = {4, 5};
+    public static final int[] SHOOTER_CANS = {11, 12};
     public static final int FEEDER_PWM = 5;
 
     public static final int ROTATOR_PWM = 6;
   
-    public static final int CONVEYOR_CAN = 5;
+    public static final int CONVEYOR_CAN = 4;
     public static final int INDEXER_CAN = 8;
 
     public static final int INTAKE_MOVER = 4;

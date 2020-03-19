@@ -18,7 +18,7 @@ public class Intake extends SubsystemBase {
     boolean correspondingLimit = upDown ? intakeLimits[1].get() : intakeLimits[0].get();
 
     if(!correspondingLimit) {
-      double speed = upDown ? 0.8 : -0.4;
+      double speed = upDown ? 1 : -0.4;
 
       vertical.set(speed);
     } else {

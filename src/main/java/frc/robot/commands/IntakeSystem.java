@@ -9,7 +9,7 @@ public class IntakeSystem extends CommandBase {
   private Intake intake;
   private OperatorInput input;
 
-  private boolean inputUp = false;
+  private boolean inputUp = true;
   
   public IntakeSystem(Intake intaker, OperatorInput operatorInput) {
     intake = intaker;
@@ -22,8 +22,8 @@ public class IntakeSystem extends CommandBase {
 
   @Override
   public void execute() {
-    // double upDown = input.tool.getBumperPressed(Hand.kLeft) ? 0.2 : (input.tool.getBumperPressed(Hand.kRight) ? -0.2 : 0);
     double activate = input.tool.getTriggerAxis(Hand.kLeft) > 0.5 ? -0.75 : 0;
+    activate = input.tool.getAButton() ? 0.75 : activate;
     inputUp = input.tool.getBButtonPressed() ? !inputUp : inputUp;
     
     intake.setVertical(inputUp);

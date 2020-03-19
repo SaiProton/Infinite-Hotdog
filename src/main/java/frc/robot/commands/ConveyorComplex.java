@@ -44,9 +44,6 @@ public class ConveyorComplex extends CommandBase {
     boolean[] sensorReadings = conveyor.getBalls();
     double encoderValue = conveyor.getEncoderVal();
 
-    System.out.println("Encoder be like: " + encoderValue + ", bruh");
-    SmartDashboard.putNumber("EncoderVal", encoderValue);
-
     if(!LimeBall.shooting) {
       if(sensorReadings[0]) {
         //conveyor.setEncoder(0);

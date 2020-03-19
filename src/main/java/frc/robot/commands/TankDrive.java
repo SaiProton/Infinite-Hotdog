@@ -27,11 +27,13 @@ public class TankDrive extends CommandBase {
   @Override
   public void execute() {
     double ly = input.driver.getRawAxis(Constants.L_STICK_Y);
-    double rx = input.driver.getRawAxis(Constants.R_STICK_X);
+    double rx = -input.driver.getRawAxis(Constants.R_STICK_X) * 0.5;
 
     SmartDashboard.putNumber("LY", ly);
     SmartDashboard.putNumber("RX", rx);
 
+    ly = Math.abs(ly) > 0.2 ? ly : 0;
+    rx = Math.abs(rx) > 0.2 ? rx : 0;
     //for trigger speed changes:
     //Constants.MAX_SPEED = Constants.DEFAULT_SPD + (input.driver.getRawAxis(Constants.R_TRIGGER) - input.driver.getRawAxis(Constants.L_TRIGGER)) / 4;
 
@@ -41,7 +43,7 @@ public class TankDrive extends CommandBase {
     double lSpeed = Constants.MAX_SPEED * (ly - rx);
     double rSpeed = Constants.MAX_SPEED * (ly + rx);
 
-    drive.setMotors(lSpeed + speedAdj[0], rSpeed + speedAdj[1]);
+    drive.setMotors(-lSpeed + speedAdj[0], -rSpeed + speedAdj[1]);
   }
 
   @Override
