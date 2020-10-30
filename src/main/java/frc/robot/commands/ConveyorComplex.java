@@ -11,19 +11,24 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ConveyorComplex extends CommandBase {
+  // dependant subsystems
   private Conveyor conveyor;
   private Turret turret;
   private OperatorInput input;
   private Intake intake;
 
+  // conveyor and indexer speed values
   public static double conveyorSpeed = 0.25;
   private double indexerSpeed = 0.25;
 
+  // theoretical amount the ball should move within the conveyor
   private final double ballMoveDist = (42.0 / (2.0 * Math.PI));
 
+  // delay values for conveyor management
   private Timer delay = new Timer();
   private final double ballDelay = 0.07;
 
+  // initializes dependant subsystems, starts delays
   public ConveyorComplex(Conveyor conveyorBelt, Turret theTurret, OperatorInput operatorInput, Intake intaker) {
     conveyor = conveyorBelt;
     turret = theTurret;
@@ -41,10 +46,15 @@ public class ConveyorComplex extends CommandBase {
 
   @Override
   public void execute() {
+    // gets sensor readings as a list of booleans
     boolean[] sensorReadings = conveyor.getBalls();
+
+    // gets encoder value as a decimal value
     double encoderValue = conveyor.getEncoderVal();
 
+    // checks if not currently shooting
     if(!LimeBall.shooting) {
+      // checks if the first sensor reads true
       if(sensorReadings[0]) {
         //conveyor.setEncoder(0);
         delay.reset();
@@ -58,10 +68,12 @@ public class ConveyorComplex extends CommandBase {
       }
     }
 
+    // if the second sensor sees a ball, and the turret doesnt currently see a ball in the launch position, move the ball to the position
     if(sensorReadings[1] && !turret.getBall()) {
       conveyor.setIndexer(conveyorSpeed);
     }
 
+    // if a ball is in the launch position, set indexer to 0
     if(turret.getBall()) {
       conveyor.setIndexer(0);
     }

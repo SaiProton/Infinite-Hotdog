@@ -10,20 +10,24 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class LimeBall extends CommandBase {
+  // dependant subsystems
   private OperatorInput input;
   private Turret turret;
   private Limelight lime;
   private Conveyor conveyor;
 
+  // booleans for checking shooting status
   private boolean tracking = false;
   public static boolean shooting = false;
   private boolean lastShoot = false;
   private boolean lastSense = false;
 
+  // various shooting delays
   private Timer delay = new Timer();
   private Timer feedDelay = new Timer();
   private Timer shootDelay = new Timer();
 
+  // initializing subsystems
   public LimeBall(OperatorInput operatorInput, Turret theTurret, Conveyor conveyorBelt, Limelight limeLight) {
     input = operatorInput;
     turret = theTurret;
@@ -31,6 +35,7 @@ public class LimeBall extends CommandBase {
     conveyor = conveyorBelt;    
   }
 
+  // turns on limelight LEDs, starts delays
   @Override
   public void initialize() {
     lime.setLEDs(true);
@@ -40,20 +45,25 @@ public class LimeBall extends CommandBase {
 
   @Override
   public void execute() {
-    tracking = input.tool.getXButtonPressed() ? !tracking : tracking;
+    // tracking = input.tool.getXButtonPressed() ? !tracking : tracking;
+    // gets user input for shooting
     shooting = input.tool.getTriggerAxis(Hand.kRight) > 0.5 ? true : false;
     
     if(shooting) {
+      // auto-tracking is set to false once actually shooting
       tracking = false;
       
-      turret.setShooters(1);
+      // sets turret to speed from 0-1
+      turret.setShooters(0.5);
 
       if(!lastShoot) {
         delay.reset();
         delay.start();
       }
-
+      
+      // if the ball isnt in the shoot position
       if(!turret.getBall()) {
+        // sets conveyor on
         conveyor.setConveyor(ConveyorComplex.conveyorSpeed * 1.5);
         if(shootDelay.get() > 0.15) {
           turret.setFeeder(0);
@@ -69,14 +79,18 @@ public class LimeBall extends CommandBase {
       turret.cease();
     }
 
-    // if(input.tool.getXButton()) {
-    //   turret.setRotation(-0.5);
-    // } else if(input.tool.getYButton()) {
-    //   turret.setRotation(0.5);
-    // }
+    // Y and A correspong to rotating the turret, (but its best to let it rotate manually)
+    if(input.tool.getYButton()) {
+      turret.setRotation(-0.9);
+    } else if(input.tool.getAButton()) {
+      turret.setRotation(0.9);
+    } else {
+      turret.setRotation(0);
+    }
 
     lime.setLEDs(tracking);
 
+    // if tracking mode is on
     if(tracking) {
       double xangle = lime.getValues().get("xangle");
       // System.out.println("AREA: " + lime.getValues().get("area"));
@@ -84,7 +98,7 @@ public class LimeBall extends CommandBase {
 
       turret.setRotation(-xangle / 5);
     }
-
+    
     lastShoot = shooting;
     lastSense = turret.getBall();
   }

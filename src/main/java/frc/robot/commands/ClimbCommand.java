@@ -6,9 +6,13 @@ import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.OperatorInput;
 
 public class ClimbCommand extends CommandBase {
+  // climb subsystem
   private Climb climb;
+
+  // input subsystem
   private OperatorInput input;
   
+  // initializes subsystems
   public ClimbCommand(Climb climber, OperatorInput operatorInput) {
     climb = climber;
     input = operatorInput;
@@ -18,7 +22,8 @@ public class ClimbCommand extends CommandBase {
   public void initialize() {
     
   }
- 
+  
+  // takes input from controller, sets arm to corresponding speed
   @Override 
   public void execute() {
     double climbSpeed = input.tool.getBumper(Hand.kLeft) ? -0.75 : (input.tool.getBumper(Hand.kRight) ? 0.25 : 0);

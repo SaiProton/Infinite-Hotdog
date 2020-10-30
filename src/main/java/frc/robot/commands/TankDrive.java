@@ -7,11 +7,14 @@ import frc.robot.subsystems.OperatorInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TankDrive extends CommandBase {
+  // subsystems for inputs and drive
   private DriveTrain drive;
   private OperatorInput input;
 
+  // --not used cause buggy-- adjustments used for auto-tracking
   private double[] speedAdj = {0, 0};
-    
+  
+  // sets local variables to passed in variables when instantiating
   public TankDrive(DriveTrain driveSystem, OperatorInput userInput) {
     drive = driveSystem;
     input = userInput;
@@ -27,13 +30,14 @@ public class TankDrive extends CommandBase {
   @Override
   public void execute() {
     double ly = input.driver.getRawAxis(Constants.L_STICK_Y);
-    double rx = -input.driver.getRawAxis(Constants.R_STICK_X) * 0.5;
+    double rx = -input.driver.getRawAxis(Constants.R_STICK_X) * 0.75;
 
     SmartDashboard.putNumber("LY", ly);
     SmartDashboard.putNumber("RX", rx);
 
     ly = Math.abs(ly) > 0.2 ? ly : 0;
     rx = Math.abs(rx) > 0.2 ? rx : 0;
+
     //for trigger speed changes:
     //Constants.MAX_SPEED = Constants.DEFAULT_SPD + (input.driver.getRawAxis(Constants.R_TRIGGER) - input.driver.getRawAxis(Constants.L_TRIGGER)) / 4;
 

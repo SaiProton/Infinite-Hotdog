@@ -1,6 +1,8 @@
 package frc.robot;
 
 public final class Constants {
+    // This class has runs NO CODE, this is purely a convenience file for storing important variables
+
     //User Input Variables
     public static final int DRIVER_CONTROLLER = 0;
     public static final int TOOL_CONTROLLER = 1;

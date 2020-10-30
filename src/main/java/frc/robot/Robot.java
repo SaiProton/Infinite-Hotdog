@@ -7,60 +7,62 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private RobotContainer roboContainer;
 
+  // this calls when the robot code starts
   @Override
   public void robotInit() {
     roboContainer = new RobotContainer();
   }
 
+  // always called periodically
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
 
+  // called when robot is disabled
   @Override
   public void disabledInit() {
   }
 
+  // called continously (periodically) when robot is disabled
   @Override
   public void disabledPeriodic() {
   }
 
+  // called when autonomous mode is initiated
   @Override
   public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.schedule();
-    // }
   }
 
+  // called periodically in autonomous mode
   @Override
   public void autonomousPeriodic() {
   }
 
+  // called when tele-operated mode is initiated
   @Override
   public void teleopInit() {
-    // if (m_autonomousCommand != null) {
-    //   m_autonomousCommand.cancel();
-    // }
-
+    // stores all commands in defaultCommands
     Command[] defaultCommands = roboContainer.getAllDefaultCommands();
     
+    // loops through all commands, schedules them to run
     for(Command c : defaultCommands) {
       c.schedule(false);
     }
   }
 
+  // calls continously when tele-operated mode is on
   @Override
   public void teleopPeriodic() {
-    //not gonna be used much, but use for things that need global updating
   }
 
+  // calls when test mode is initiated
   @Override
   public void testInit() {
     CommandScheduler.getInstance().cancelAll();
   }
 
+  // calls periodically when test mode is on
   @Override
   public void testPeriodic() {
   }

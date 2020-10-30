@@ -9,10 +9,14 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
+  // left and right motors
   private CANSparkMax[] leftMotors = new CANSparkMax[2];
   private CANSparkMax[] rightMotors = new CANSparkMax[2];
+
+  // NavX for rotational tracking and accelerometer support
   // public AHRS navX = new AHRS(Port.kMXP);
 
+  //initializes motors
   public DriveTrain() {
     for(int i = 0; i < 2; i++) {
       leftMotors[i] = new CANSparkMax(Constants.LEFT_DRIVE_CANS[i], MotorType.kBrushless);
@@ -21,6 +25,7 @@ public class DriveTrain extends SubsystemBase {
     }
   }
 
+  // sets motor speeds
   public void setMotors(double left, double right) {
     for(int i = 0; i < 2; i++) {
       leftMotors[i].set(left);
